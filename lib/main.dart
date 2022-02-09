@@ -1,4 +1,6 @@
+import 'package:fb_newsfeed/assets/my_flutter_app_icons.dart';
 import 'package:flutter/material.dart';
+import 'homePage.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -14,177 +16,81 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  Widget quoteTemplate(quote) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-      child: Column(
-        children: <Widget>[
-          Text(
-            quote.text,
-            style: TextStyle(fontSize: 18.0, color: Colors.grey[600]),
-          ),
-          SizedBox(
-            height: 6.0,
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
+  Widget build(BuildContext context) => DefaultTabController(
+        length: 6,
+        child: Scaffold(
           backgroundColor: Colors.white,
-          title: const Text(
-            'facebook',
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 20.0,
-            ),
-          ),
-          actions: [
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.grey[200],
-              child: IconButton(
-                icon: const Icon(
-                  Icons.search,
-                  color: Colors.black,
+          appBar: AppBar(
+              backgroundColor: Colors.white,
+              title: const Text(
+                'facebook',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 20.0,
                 ),
-                onPressed: () {},
               ),
-            ),
-            const SizedBox(
-              width: 10.0,
-            ),
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.grey[200],
-              child: IconButton(
-                icon: const Icon(
-                  Icons.messenger,
-                  color: Colors.black,
+              actions: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.grey[200],
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {},
+                  ),
                 ),
-                onPressed: () {},
-              ),
-            ),
-          ],
-          elevation: 0,
-        ),
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.home))),
-                  Expanded(
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.group))),
-                  Expanded(
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.watch))),
-                  Expanded(
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.gamepad))),
-                  Expanded(
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.ring_volume))),
-                  Expanded(
-                      child: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.menu))),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.grey[200],
+                  child: IconButton(
+                    icon: const Icon(
+                      MyFlutterApp.facebook_messenger,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+              elevation: 0,
+              bottom: TabBar(
+                indicatorColor: Colors.blue,
+                tabs: [
+                  Tab(icon: Icon(Icons.home, color: Colors.black, size: 22)),
+                  Tab(
+                      icon: Icon(MyFlutterApp.group,
+                          color: Colors.black, size: 22)),
+                  Tab(
+                      icon: Icon(MyFlutterApp.television,
+                          color: Colors.black, size: 22)),
+                  Tab(icon: Icon(Icons.gamepad, color: Colors.black, size: 22)),
+                  Tab(
+                      icon: Icon(MyFlutterApp.bell,
+                          color: Colors.black, size: 22)),
+                  Tab(icon: Icon(Icons.menu, color: Colors.black, size: 22)),
                 ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.person),
-                        iconSize: 50,
-                      )),
-                  Expanded(
-                    flex: 4,
-                    child: TextField(
-                      style: const TextStyle(
-                          fontSize: 15.0, height: 1.0, color: Colors.black),
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        hintStyle: TextStyle(color: Colors.grey[800]),
-                        hintText: "What's on your mind?",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(mainAxisSize: MainAxisSize.max, children: [
-                Expanded(
-                  flex: 1,
-                  child: ElevatedButton.icon(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                    ),
-                    label: const Text(
-                      'Live',
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.live_tv,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ElevatedButton.icon(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                    ),
-                    label: const Text(
-                      'Photo',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.photo,
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ElevatedButton.icon(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                    ),
-                    label: const Text(
-                      'Room',
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.room,
-                      color: Colors.purple,
-                    ),
-                  ),
-                ),
-              ]),
+              )),
+          body: TabBarView(
+            children: [
+              HomePage(),
+              buildPage('Group Page'),
+              buildPage('Watch Page'),
+              buildPage('Gaming Page'),
+              buildPage('Notification Page'),
+              buildPage('Menu Page'),
             ],
           ),
-        ));
-  }
+        ),
+      );
+  Widget buildPage(String text) => Center(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 28),
+        ),
+      );
 }
