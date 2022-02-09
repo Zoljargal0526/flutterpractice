@@ -23,7 +23,7 @@ class _TestState extends State<Test> {
           backgroundColor: Colors.white,
           appBar: AppBar(
               backgroundColor: Colors.white,
-              title: const Text(
+              title: Text(
                 'facebook',
                 style: TextStyle(
                   color: Colors.blue,
@@ -42,14 +42,14 @@ class _TestState extends State<Test> {
                     onPressed: () {},
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10.0,
                 ),
                 CircleAvatar(
                   radius: 20,
                   backgroundColor: Colors.grey[200],
                   child: IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       MyFlutterApp.facebook_messenger,
                       color: Colors.black,
                     ),

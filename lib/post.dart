@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'assets/my_flutter_app_icons.dart';
 
 class Post extends StatefulWidget {
-  const Post({Key? key}) : super(key: key);
+  String? title = "";
+  String content = "";
+  String imageUrl = "";
+
+  Post({Key? key, this.title, required this.content, required this.imageUrl})
+      : super(key: key);
 
   @override
   _PostState createState() => _PostState();
@@ -35,7 +40,7 @@ class _PostState extends State<Post> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Title',
+                      widget.content,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Row(children: [
@@ -86,7 +91,7 @@ class _PostState extends State<Post> {
                 size: 14,
               ),
               Text(
-                '165',
+                '16',
                 style: TextStyle(color: Colors.grey, fontSize: 14),
               ),
             ],

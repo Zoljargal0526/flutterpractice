@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'post.dart';
+import 'seconScreen.dart';
+import 'assets/my_flutter_app_icons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -80,7 +82,12 @@ class _HomePageState extends State<HomePage> {
                       'Photo',
                       style: TextStyle(color: Colors.grey),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SecondScreen()));
+                    },
                     icon: const Icon(
                       Icons.photo,
                       color: Colors.green,
@@ -106,8 +113,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ]),
-              Post(),
-              Post(),
+              Post(content: "AFS", imageUrl: ""),
+              Post(
+                content: 'SDFSG',
+                imageUrl: '',
+                title: "SDFDSF",
+              ),
             ],
           ),
         ),
