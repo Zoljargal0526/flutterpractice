@@ -1,13 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'assets/my_flutter_app_icons.dart';
 
-class Post extends StatefulWidget {
-  String? title = "";
+class PostModel {
+  String title = "";
   String content = "";
   String imageUrl = "";
+  PostModel(
+      {required this.title, required this.content, required this.imageUrl});
+}
 
-  Post({Key? key, this.title, required this.content, required this.imageUrl})
-      : super(key: key);
+class Post extends StatefulWidget {
+  PostModel model;
+
+  Post({Key? key, required this.model}) : super(key: key);
 
   @override
   _PostState createState() => _PostState();
@@ -40,7 +47,7 @@ class _PostState extends State<Post> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.content,
+                      widget.model.title,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Row(children: [
@@ -73,14 +80,13 @@ class _PostState extends State<Post> {
       Padding(
         padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
         child: Text(
-          'Title',
+          widget.model.content,
           textAlign: TextAlign.left,
         ),
       ),
       Padding(
         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-        child: Image.network(
-            'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'),
+        child: Image.file(File(widget.model.imageUrl)),
       ),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Container(

@@ -1,9 +1,52 @@
-import 'package:flutter/material.dart';
-import 'main.dart';
+import 'dart:io';
+import 'dart:typed_data';
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({Key? key}) : super(key: key);
+import 'package:fb_newsfeed/post.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class SecondScreen extends StatefulWidget {
+  Function? sendPost;
+
+  SecondScreen({Key? key, this.sendPost}) : super(key: key);
   @override
+  State<StatefulWidget> createState() {
+    return _SecondScreenState();
+  }
+}
+
+class _SecondScreenState extends State<SecondScreen> {
+  XFile? uploadedImage;
+  late TextEditingController _controller;
+  @override
+  initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  Future getImage() async {
+    final _image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      uploadedImage = _image;
+    });
+  }
+
+  void createPost() {
+    if (uploadedImage != null) {
+      print(uploadedImage!.path);
+      var post = PostModel(
+          title: "Zoloo",
+          content: _controller.text,
+          imageUrl: uploadedImage!.path);
+      if (widget.sendPost != null) {
+        widget.sendPost!(post);
+      }
+      Navigator.pop(context);
+    } else {
+      // alert
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -57,7 +100,9 @@ class SecondScreen extends StatelessWidget {
                                   RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4.0),
                               ))),
-                          onPressed: () {},
+                          onPressed: () {
+                            createPost();
+                          },
                         ),
                       ),
                     ),
@@ -166,9 +211,13 @@ class SecondScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(4.0),
                 child: TextFormField(
+                  controller: _controller,
                   minLines: 1,
                   maxLines: 6,
                   keyboardType: TextInputType.multiline,
+                  onChanged: (value) {
+                    // text = value;
+                  },
                   decoration: new InputDecoration(
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -180,9 +229,14 @@ class SecondScreen extends StatelessWidget {
                       hintText: "What's on your mind"),
                 ),
               ),
-              ElevatedButton(onPressed: () {}, child: Icon(Icons.image)),
-              Image.network(
-                  'https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp')
+              ElevatedButton(
+                  onPressed: () {
+                    getImage();
+                  },
+                  child: Icon(Icons.image)),
+              uploadedImage != null
+                  ? Image.file(File(uploadedImage!.path))
+                  : Text("Image is not loaded"),
             ],
           ),
         ),

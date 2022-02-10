@@ -11,6 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<PostModel> posts = List.empty(growable: true);
+  void receivePost(PostModel postModel) {
+    setState(() {
+      posts.add(postModel);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +93,8 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SecondScreen()));
+                              builder: (context) =>
+                                  SecondScreen(sendPost: receivePost)));
                     },
                     icon: const Icon(
                       Icons.photo,
@@ -113,12 +121,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ]),
-              Post(content: "AFS", imageUrl: ""),
-              Post(
-                content: 'SDFSG',
-                imageUrl: '',
-                title: "SDFDSF",
-              ),
+              for (var p in posts) Post(model: p)
             ],
           ),
         ),
